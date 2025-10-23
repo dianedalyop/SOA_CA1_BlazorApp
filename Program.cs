@@ -1,3 +1,5 @@
+using SOA_CA1_BlazorApp;
+using SOA_CA1_BlazorApp.Services;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 

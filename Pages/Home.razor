@@ -1,7 +1,48 @@
 ﻿@page "/"
+@inject SOA_CA1_BlazorApp.Services.MealService MealService
 
-<PageTitle>Home</PageTitle>
+<h3 class="text-center">FIND YOUR FAVORITE MEAL</h3>
 
-<h1>Hello, world!</h1>
+<div class="text-center mb-3">
+    <input @bind="searchQuery" placeholder="Search for a Dish" />
+    <button @onclick="SearchMeals">Search</button>
+</div>
 
-Welcome to your new app.
+@if (isLoading)
+{
+    <p>Loading...</p>
+}
+else if (meals != null && meals.Any())
+{
+    <div class="meal-grid">
+        @foreach (var meal in meals)
+        {
+            <div class="meal-card">
+                <img src="@meal.strMealThumb" alt="@meal.strMeal" width="200" />
+                <h4>@meal.strMeal</h4>
+                <p><strong>Category:</strong> @meal.strCategory</p>
+                <p><strong>Area:</strong> @meal.strArea</p>
+            </div>
+        }
+    </div>
+}
+else if (hasSearched)
+{
+    <p>No meals found for "@searchQuery".</p>
+}
+
+@code {
+    private string searchQuery = "";
+    private List<SOA_CA1_BlazorApp.Models.Meal> meals;
+    private bool isLoading = false;
+    private bool hasSearched = false;
+
+    private async Task SearchMeals()
+    {
+        if (string.IsNullOrWhiteSpace(searchQuery)) return;
+        isLoading = true;
+        hasSearched = true;
+        meals = await MealService.SearchMealsAsync(searchQuery);
+        isLoading = false;
+    }
+}

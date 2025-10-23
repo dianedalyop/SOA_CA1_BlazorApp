@@ -98,6 +98,34 @@ a, .btn-link {
         content: var(--blazor-load-percentage-text, "Loading");
     }
 
+.meal-grid {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+
+
+button {
+    width: 120px;
+    border: none;
+    background: #c4083a;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.meal-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+    width: 220px;
+    text-align: center;
+    background: #f090a9;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
 code {
     color: #c02d76;
 }
