@@ -15,6 +15,9 @@ a, .btn-link {
     background-color: #1b6ec2;
     border-color: #1861ac;
 }
+.sidebar{
+    background-color: hotpink;
+}
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
@@ -72,6 +75,7 @@ a, .btn-link {
     height: 8rem;
     margin: 20vh auto 1rem auto;
 }
+.
 
     .loading-progress circle {
         fill: none;
@@ -110,7 +114,7 @@ a, .btn-link {
 button {
     width: 120px;
     border: none;
-    background: #c4083a;
+    background: #631f04;
     color: white;
     padding: 0.5rem 1rem;
     border-radius: 5px;
@@ -123,8 +127,15 @@ button {
     padding: 10px;
     width: 220px;
     text-align: center;
-    background: #f090a9;
+    background: #de8e6f;
     box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
+input {
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 700px;
 }
 code {
     color: #c02d76;
