@@ -1,0 +1,38 @@
+﻿<h3>MealDetails</h3>
+
+@code {
+
+}
+@page "/meal/{mealName}"
+@inject SOA_CA1_BlazorApp.Services.MealService MealService
+
+<h3>@mealName</h3>
+
+@if (meal == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <div class="meal-details">
+        <img src="@meal.strMealThumb"
+			 alt="@meal.strMeal"
+			 width="150px" />
+        <h2>@meal.strMeal</h2>
+        <p><strong>Category:</strong> @meal.strCategory</p>
+        <p><strong>Area:</strong> @meal.strArea</p>
+        <h4>Instructions:</h4>
+        <p>@meal.strInstructions</p>
+    </div>
+}
+
+@code {
+    [Parameter] public string mealName { get; set; }
+    private SOA_CA1_BlazorApp.Models.Meal meal;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var meals = await MealService.SearchMealsAsync(mealName);
+        meal = meals?.FirstOrDefault();
+    }
+}

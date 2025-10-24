@@ -125,7 +125,7 @@ button {
     border: 1px solid #ddd;
     border-radius: 10px;
     padding: 10px;
-    width: 220px;
+    width: 300px;
     text-align: center;
     background: #de8e6f;
     box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
@@ -137,6 +137,21 @@ input {
     border-radius: 5px;
     width: 700px;
 }
+.meal-card {
+    text-decoration: none;
+    color: black;
+    transition: transform 0.2s;
+}
+
+    .meal-card:hover {
+        transform: scale(1.08);
+    }
+
+.meal-details {
+    text-align: center;
+    padding: 30px;
+}
+
 code {
     color: #c02d76;
 }
