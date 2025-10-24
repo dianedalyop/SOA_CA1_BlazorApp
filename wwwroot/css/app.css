@@ -144,13 +144,14 @@ input {
 }
 
     .meal-card:hover {
-        transform: scale(1.08);
+        transform: scale(1.05);
     }
 
 .meal-details {
     text-align: center;
     padding: 30px;
 }
+
 
 code {
     color: #c02d76;
