@@ -17,12 +17,13 @@ else if (meals != null && meals.Any())
     <div class="meal-grid">
         @foreach (var meal in meals)
         {
-            <div class="meal-card">
-                <img src="@meal.strMealThumb" alt="@meal.strMeal" width="200" />
+            <a href="@($"/meal/{meal.strMeal}")" class="meal-card">
+                <img src="@meal.strMealThumb" alt="@meal.strMeal" width="250" />
                 <h4>@meal.strMeal</h4>
                 <p><strong>Category:</strong> @meal.strCategory</p>
                 <p><strong>Area:</strong> @meal.strArea</p>
-            </div>
+            </a>
+
         }
     </div>
 }
