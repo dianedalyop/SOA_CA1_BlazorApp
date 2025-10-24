@@ -1,36 +1,89 @@
 ﻿<h3>MealDetails</h3>
 
-@code {
-
-}
 @page "/meal/{mealName}"
 @inject SOA_CA1_BlazorApp.Services.MealService MealService
+@inject SOA_CA1_BlazorApp.Services.NutritionDataService NutritionDataService
 
-<h3>@mealName</h3>
+<h2 class="page-title">@mealName Details</h2>
 
-@if (meal == null)
+@if (isLoading)
 {
-    <p>Loading...</p>
+    <p>Loading data...</p>
+}
+else if (meal is null)
+{
+    <p>No meal found for "@mealName". Please try again.</p>
 }
 else
 {
     <div class="meal-details">
-        <img src="@meal.strMealThumb" alt="@meal.strMeal" width="150" />
-        <h2>@meal.strMeal</h2>
+        <img src="@meal.strMealThumb" alt="@meal.strMeal" width="300" />
+        <h3>@meal.strMeal</h3>
         <p><strong>Category:</strong> @meal.strCategory</p>
         <p><strong>Area:</strong> @meal.strArea</p>
+
         <h4>Instructions:</h4>
         <p>@meal.strInstructions</p>
     </div>
+
+    @if (nutrition is not null)
+    {
+        <div class="nutrition-card">
+            <h4>Nutrition Facts</h4>
+            <p><strong>Calories:</strong> @nutrition.Calories</p>
+            <p><strong>Protein:</strong> @nutrition.ProteinG g</p>
+            <p><strong>Fat:</strong> @nutrition.FatTotalG g</p>
+            <p><strong>Carbs:</strong> @nutrition.CarbohydratesTotalG g</p>
+        </div>
+    }
+    else
+    {
+        <p>No nutrition data available for this meal.</p>
+    }
 }
 
 @code {
     [Parameter] public string mealName { get; set; }
-    private SOA_CA1_BlazorApp.Models.Meal meal;
+
+    private SOA_CA1_BlazorApp.Models.Meal? meal;
+    private SOA_CA1_BlazorApp.Models.NutritionData? nutrition;
+    private bool isLoading = true;
 
     protected override async Task OnInitializedAsync()
     {
-        var meals = await MealService.SearchMealsAsync(mealName);
-        meal = meals?.FirstOrDefault();
+        try
+        {
+            // Getting meal info
+            var meals = await MealService.SearchMealsAsync(mealName);
+            meal = meals?.FirstOrDefault();
+
+            // Getting nutrition info
+            var nutritionServiceData = await NutritionDataService.GetNutritionAsync(mealName);
+            if (nutritionServiceData != null)
+            {
+                // Maping properties from Services.NutritionData to Models.NutritionData
+                nutrition = new SOA_CA1_BlazorApp.Models.NutritionData
+                {
+                    Name = nutritionServiceData.Name,
+                    Calories = nutritionServiceData.Calories,
+                    FatTotalG = nutritionServiceData.FatTotalG,
+                    ProteinG = nutritionServiceData.ProteinG,
+                    CarbohydratesTotalG = nutritionServiceData.CarbohydratesTotalG
+                    
+                };
+            }
+            else
+            {
+                nutrition = null;
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading meal or nutrition data: {ex.Message}");
+        }
+        finally
+        {
+            isLoading = false;
+        }
     }
 }
