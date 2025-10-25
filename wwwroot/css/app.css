@@ -1,6 +1,8 @@
 html, body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    max-height:1000px;
 }
+
 
 h1:focus {
     outline: none;
@@ -23,8 +25,12 @@ a, .btn-link {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
-.content {
-    padding-top: 1.1rem;
+
+article {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
 }
 
 .valid.modified:not([type=checkbox]) {
@@ -109,7 +115,11 @@ a, .btn-link {
     flex-wrap: wrap;
 }
 
-
+.meal-content {
+    display:flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
 
 button {
     width: 120px;
@@ -133,7 +143,7 @@ button {
 input {
     padding: 0.5rem;
     margin-bottom: 1rem;
-    border: 1px solid #ccc;
+    border: none;
     border-radius: 5px;
     width: 700px;
 }
@@ -144,12 +154,31 @@ input {
 }
 
     .meal-card:hover {
-        transform: scale(1.05);
+        transform: scale(1.00);
     }
 
 .meal-details {
     text-align: center;
+    margin-bottom: 30px;
     padding: 30px;
+    background-color: white;
+    border: 20px;
+    width: 500px;
+    border-radius: 20px;
+}
+.nutrition-details {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 30px;
+    background-color: white;
+    border: 20px;
+    width:500px;
+    border-radius:20px;
+}
+
+.nutrition-card {
+    padding: 30px;
+    border: 20px;
 }
 
 

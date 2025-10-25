@@ -5,7 +5,7 @@
 @inject SOA_CA1_BlazorApp.Services.NutritionDataService NutritionDataService
 
 <h2 class="page-title">@mealName Details</h2>
-
+ 
 @if (isLoading)
 {
     <p>Loading data...</p>
@@ -16,6 +16,7 @@ else if (meal is null)
 }
 else
 {
+   
     <div class="meal-details">
         <img src="@meal.strMealThumb" alt="@meal.strMeal" width="300" />
         <h3>@meal.strMeal</h3>
@@ -25,23 +26,26 @@ else
         <h4>Instructions:</h4>
         <p>@meal.strInstructions</p>
     </div>
-
+    
     @if (nutrition is not null)
     {
-        <div class="nutrition-card">
-            <h4>Nutrition Facts</h4>
+        <div class="nutrition-details" >
+    
+            <h4>Nutrition Facts (Per Serving)</h4>
             <p><strong>Calories:</strong> @nutrition.Calories</p>
             <p><strong>Protein:</strong> @nutrition.ProteinG g</p>
             <p><strong>Fat:</strong> @nutrition.FatTotalG g</p>
             <p><strong>Carbs:</strong> @nutrition.CarbohydratesTotalG g</p>
+
         </div>
+    
     }
     else
     {
         <p>No nutrition data available for this meal.</p>
     }
+   
 }
-
 @code {
     [Parameter] public string mealName { get; set; }
 
@@ -58,7 +62,7 @@ else
             meal = meals?.FirstOrDefault();
 
             // Getting nutrition info
-            var nutritionServiceData = await NutritionDataService.GetNutritionAsync(mealName);
+            var nutritionServiceData = await NutritionDataService.GetNutritionAsync($"{mealName} 1 serving");
             if (nutritionServiceData != null)
             {
                 // Maping properties from Services.NutritionData to Models.NutritionData

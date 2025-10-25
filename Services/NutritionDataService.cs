@@ -26,10 +26,13 @@ namespace SOA_CA1_BlazorApp.Services
                 request.Headers.Add("X-Api-Key", _apiKey);
 
                 var response = await _httpClient.SendAsync(request);
+          
+                
                 if (!response.IsSuccessStatusCode)
                     return null;
 
                 var json = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"Nutrition API raw result: {json}");
                 var result = JsonSerializer.Deserialize<NutritionApiResponse>(
                     json,
                     new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
